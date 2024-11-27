@@ -61,4 +61,8 @@ export class ListComponent implements OnInit {
     
   }
 
+  viewSeats(theaterId:number) {
+    this.router.navigate(["seats/list/" + theaterId])
+  }
+
 }

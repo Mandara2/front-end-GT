@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private activateRoute:ActivatedRoute) { }
+  theaterId: number
   ngOnInit(): void {
+    if (this.activateRoute.snapshot.params.id) {
+      this.theaterId = this.activateRoute.snapshot.params.theaterId
+      //this.getSeats(theaterId)
+    }
   }
 
 }
