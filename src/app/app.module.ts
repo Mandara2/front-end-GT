@@ -30,7 +30,7 @@ import { ManageComponent } from './pages/theaters/manage/manage.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ListComponent,
+    //ListComponent,
     //ManageComponent
   ],
   //exports: [ManageComponent], // Exporta el componente si lo necesitas en otros módulos
