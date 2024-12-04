@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ListComponent,
-    ManageComponent
+    ManageComponent //Esto no debe ir en el app.module.ts
   ],
   imports: [
     CommonModule,

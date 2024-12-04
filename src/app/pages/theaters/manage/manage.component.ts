@@ -26,6 +26,8 @@ BUSCAR EN LA DOCUMENTACION DE "VALIDATORS ANGULAR"
 
 9. IMPORTAMOS  ReactiveFormsModulo
 
+10. Agregar el condicional para el create y el update
+
 
 PARA RELACIONES
 
@@ -89,6 +91,11 @@ export class ManageComponent implements OnInit {
   }
 
   create() {
+    if(this.theFormGroup.invalid) {
+      this.trySend = true
+      Swal.fire("Error en el formulario", " Ingrese correctamente los datos solicitados", "error")
+      return
+    }
     this.theaterService.create(this.theater).subscribe(data=> {
       Swal.fire("Creado", "Se ha creado el teatro existosamente", "success")
       this.router.navigate(["theaters/list"]) //Aqui me muevo para el theaters list 
@@ -96,6 +103,11 @@ export class ManageComponent implements OnInit {
   }
 
   update() {
+    if(this.theFormGroup.invalid) {
+      this.trySend = true
+      Swal.fire("Error en el formulario", " Ingrese correctamente los datos solicitados", "error")
+      return
+    }
     this.theaterService.update(this.theater).subscribe(data=> {
       Swal.fire("Actualizado", "Se ha actualizado el teatro existosamente", "success")
       this.router.navigate(["theaters/list"]) //Aqui me muevo para el theaters list 

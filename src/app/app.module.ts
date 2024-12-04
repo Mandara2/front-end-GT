@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpContext } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -12,8 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { ListComponent } from './pages/theaters/list/list.component';
-import { ManageComponent } from './pages/theaters/manage/manage.component';
+import { SecurityInterceptor } from './interceptors/security.interceptor';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
+import { NoAuthenticatedGuard } from './guards/no-authenticated.guard';
 
 
 @NgModule({
@@ -29,12 +30,18 @@ import { ManageComponent } from './pages/theaters/manage/manage.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
-    //ListComponent,
-    //ManageComponent
+    AuthLayoutComponent
+  ], //se puede desactivar el interceptor comentanto los providers
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: SecurityInterceptor,
+    multi: true,
+    },
+    AuthenticatedGuard,
+    NoAuthenticatedGuard,
   ],
-  //exports: [ManageComponent], // Exporta el componente si lo necesitas en otros módulos
-  providers: [],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
